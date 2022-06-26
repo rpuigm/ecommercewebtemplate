@@ -2,10 +2,10 @@ package net.ostemplate.app.productos.models.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
-import net.ostemplate.app.productos.models.entity.Cesta;
+import net.ostemplate.app.productos.models.entity.CestaEntity;
 
-public interface ComprasRepository extends CrudRepository<Cesta, Long> {
+public interface ComprasRepository extends CrudRepository<CestaEntity, Long> {
 	
-	Cesta findByIdUsuario(Long idUsuario);
+	CestaEntity findByIdUsuario(Long idUsuario);
 
 }

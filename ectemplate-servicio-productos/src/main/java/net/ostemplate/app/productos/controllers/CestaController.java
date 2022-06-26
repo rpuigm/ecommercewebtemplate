@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.ostemplate.app.productos.mappers.CestaMapper;
 import net.ostemplate.app.productos.models.entity.Cesta;
 import net.ostemplate.app.productos.models.service.CestaServiceImpl;
 
@@ -28,17 +29,17 @@ public class CestaController {
 	@PostMapping("/cesta/actualiza-cesta")
 	public Cesta actualizaCesta(@RequestBody Cesta cesta) {
 		System.out.println("numero productos en cesta"+cesta.getProductoCantidad().size());
-		return cestaServiceImpl.actualizaCesta(cesta);
+		return cestaServiceImpl.actualizaCesta(CestaMapper.mapToCestaEntityFromCesta(cesta));
 	}
 	
 	@GetMapping("/cesta/listacestas")
 	public List<Cesta> listaCestas(){
-		return cestaServiceImpl.listaCestas();
+		return CestaMapper.mapToListCestaFromListCestaEntity(cestaServiceImpl.listaCestas()) ;
 	}
 	
 	@DeleteMapping("/cesta/elimina-cesta")
 	public void recuperaCestaPorIdUsuario (@RequestBody Cesta cesta) {
-		cestaServiceImpl.eliminaCesta(cesta);
+		cestaServiceImpl.eliminaCesta(CestaMapper.mapToCestaEntityFromCesta(cesta));
 	}
 	
 }

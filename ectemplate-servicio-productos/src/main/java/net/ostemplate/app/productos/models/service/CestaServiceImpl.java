@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import net.ostemplate.app.productos.models.dao.ComprasRepository;
 import net.ostemplate.app.productos.models.dao.ProductoCantidadRepository;
 import net.ostemplate.app.productos.models.entity.Cesta;
+import net.ostemplate.app.productos.models.entity.CestaEntity;
 import net.ostemplate.app.productos.models.entity.ProductoCantidad;
 
 @Service
@@ -23,14 +24,14 @@ public class CestaServiceImpl implements CestaServiceI {
 
 	@Override
 	@Transactional
-	public Cesta guardaCesta(Cesta cesta) {
-		return comprasRepository.save(cesta);
+	public CestaEntity guardaCesta(CestaEntity cestaEntity) {
+		return comprasRepository.save(cestaEntity);
 	}
 
 	@Override
 	@Transactional
-	public List<Cesta> listaCestas() {
-		return (List<Cesta>) comprasRepository.findAll();
+	public List<CestaEntity> listaCestas() {
+		return (List<CestaEntity>) comprasRepository.findAll();
 	}
 
 	@Override
@@ -41,22 +42,22 @@ public class CestaServiceImpl implements CestaServiceI {
 	
 	@Override
 	@Transactional
-	public Cesta actualizaCesta (Cesta cesta) {
-		return comprasRepository.save(cesta);
+	public CestaEntity actualizaCesta (CestaEntity cestaEntity) {
+		return comprasRepository.save(cestaEntity);
 	}
 	
 	@Override
 	@Transactional
-	public void eliminaCesta (Cesta cesta) {
-		comprasRepository.delete(cesta);
+	public void eliminaCesta (CestaEntity cestaEntity) {
+		comprasRepository.delete(cestaEntity);
 	}
 
 
 	@Override
 	@Transactional
-	public Cesta eliminarDeLaCesta(Long idUsuario, Long idProducto) {
-		Cesta cesta = comprasRepository.findByIdUsuario(idUsuario);
-		List<ProductoCantidad> listaProductoCantidad = cesta.getProductoCantidad();
+	public CestaEntity eliminarDeLaCesta(Long idUsuario, Long idProducto) {
+		CestaEntity cestaEntity = comprasRepository.findByIdUsuario(idUsuario);
+		List<ProductoCantidad> listaProductoCantidad = cestaEntity.getProductoCantidad();
 
 		if (listaProductoCantidad != null) {
 			listaProductoCantidad.stream().filter(producto -> producto.getIdProducto() == idProducto).findAny()
@@ -66,8 +67,8 @@ public class CestaServiceImpl implements CestaServiceI {
 
 		}
 
-		cesta.setProductoCesta(listaProductoCantidad);
-		return guardaCesta(cesta);
+		cestaEntity.setProductoCesta(listaProductoCantidad);
+		return guardaCesta(cestaEntity);
 
 	}
 	@Override
@@ -77,20 +78,8 @@ public class CestaServiceImpl implements CestaServiceI {
 		
 	}
 
-	private ProductoCantidad incrementa(ProductoCantidad productoCantidad) {
-		productoCantidad.setCantidad(productoCantidad.getCantidad() + 1L);
-		return productoCantidad;
-	}
-
 	private ProductoCantidad disminuye(ProductoCantidad productoCantidad) {
 		productoCantidad.setCantidad(productoCantidad.getCantidad() - 1L);
-		return productoCantidad;
-	}
-
-	private ProductoCantidad mapToProductoCantidad(Long idProducto) {
-		ProductoCantidad productoCantidad = new ProductoCantidad();
-		productoCantidad.setCantidad(1L);
-		productoCantidad.setIdProducto(idProducto);
 		return productoCantidad;
 	}
 
