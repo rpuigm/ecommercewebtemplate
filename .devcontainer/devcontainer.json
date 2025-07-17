@@ -1,46 +1,21 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/java-postgres
 {
-	"name": "Java & PostgreSQL",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"forwardPorts": [4200, 8090 ,5432],
-	"features": {
-		"ghcr.io/devcontainers/features/node:1": {},
-		"ghcr.io/devcontainers-contrib/features/angular-cli:2": {}
-
-	},
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ryanluker.vscode-coverage-gutters"
-			]
-		}
-	},
-	//"customizations": {
-		//"vscode": {
-			//"extensions": [
-				//"vscjava.vscode-java-pack"
-				// Puedes añadir más extensiones si es necesario, separándolas por comas
-			//  ]
-		//}
-	//}
-	
-
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {}
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// This can be used to network with other containers or with the host.
-	// "forwardPorts": [5432],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "java -version",
-
-	// Configure tool-specific properties.
-	// "customizations": {},
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+  "name": "Java + Angular Dev",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [4200, 8080, 8090],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "angular.ng-template",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "features": {},
+  "postCreateCommand": "mvn --version && node -v && ng version",
+  "remoteUser": "root"
 }
