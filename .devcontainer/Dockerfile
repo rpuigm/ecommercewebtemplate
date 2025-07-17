@@ -1,17 +1,38 @@
-FROM mcr.microsoft.com/devcontainers/java:1-17-bullseye
+FROM debian:bullseye-slim
 
-ARG INSTALL_MAVEN="true"
-ARG MAVEN_VERSION=""
+# Variables para PostgreSQL
+ENV POSTGRES_USER=postgres \
+    POSTGRES_PASSWORD=postgres \
+    POSTGRES_DB=postgres \
+    PGDATA=/var/lib/postgresql/data
 
-ARG INSTALL_GRADLE="false"
-ARG GRADLE_VERSION=""
+# Instalar dependencias: PostgreSQL, curl, nodejs, etc.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    postgresql postgresql-contrib \
+    curl bash git \
+    ca-certificates \
+    gnupg \
+    lsb-release \
+    nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN if [ "${INSTALL_MAVEN}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/sdkman/bin/sdkman-init.sh && sdk install maven \"${MAVEN_VERSION}\""; fi \
-    && if [ "${INSTALL_GRADLE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/sdkman/bin/sdkman-init.sh && sdk install gradle \"${GRADLE_VERSION}\""; fi
+# Crear directorio para datos de PostgreSQL
+RUN mkdir -p ${PGDATA} && chown -R postgres:postgres /var/lib/postgresql
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+# Cambiar a usuario postgres para inicializar la base de datos
+USER postgres
 
-# [Optional] Uncomment this line to install global node packages.
-# RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g <your-package-here>" 2>&1
+# Inicializar PostgreSQL (solo estructura, sin ejecución)
+RUN /usr/lib/postgresql/*/bin/initdb -D ${PGDATA}
+
+USER root
+
+# Copiar script de arranque
+COPY init.sh /usr/local/bin/init.sh
+RUN chmod +x /usr/local/bin/init.sh
+
+# Exponer puertos comunes de desarrollo
+EXPOSE 5432 4200 8090
+
+# Lanzar init.sh como comando principal
+CMD ["/usr/local/bin/init.sh"]
