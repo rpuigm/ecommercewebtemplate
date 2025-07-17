@@ -1,38 +1,43 @@
 FROM debian:bullseye-slim
 
-# Variables para PostgreSQL
-ENV POSTGRES_USER=postgres \
-    POSTGRES_PASSWORD=postgres \
-    POSTGRES_DB=postgres \
-    PGDATA=/var/lib/postgresql/data
+# Variables
+ARG MAVEN_VERSION=3.9.11
+ARG NODE_VERSION=18
 
-# Instalar dependencias: PostgreSQL, curl, nodejs, etc.
+# Evitar preguntas durante la instalación
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Instalar dependencias básicas
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql postgresql-contrib \
-    curl bash git \
+    curl \
+    bash \
+    git \
+    unzip \
+    gnupg2 \
     ca-certificates \
-    gnupg \
-    lsb-release \
-    nodejs npm \
+    openjdk-17-jdk \
     && rm -rf /var/lib/apt/lists/*
 
-# Crear directorio para datos de PostgreSQL
-RUN mkdir -p ${PGDATA} && chown -R postgres:postgres /var/lib/postgresql
+# Instalar Maven
+RUN curl -fsSL https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar -xz -C /opt \
+    && ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvn /usr/bin/mvn
 
-# Cambiar a usuario postgres para inicializar la base de datos
-USER postgres
+ENV MAVEN_HOME=/opt/apache-maven-${MAVEN_VERSION}
+ENV PATH="${MAVEN_HOME}/bin:${PATH}"
 
-# Inicializar PostgreSQL (solo estructura, sin ejecución)
-RUN /usr/lib/postgresql/*/bin/initdb -D ${PGDATA}
+# Instalar Node.js y npm (vía NodeSource)
+RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
+    && npm install -g npm
 
-USER root
+# Instalar Angular CLI
+RUN npm install -g @angular/cli
 
-# Copiar script de arranque
-COPY init.sh /usr/local/bin/init.sh
-RUN chmod +x /usr/local/bin/init.sh
+# Crear directorio de trabajo
+WORKDIR /workspace
 
-# Exponer puertos comunes de desarrollo
-EXPOSE 5432 4200 8090
+# Exponer puertos típicos
+EXPOSE 4200 8080 8090
 
-# Lanzar init.sh como comando principal
-CMD ["/usr/local/bin/init.sh"]
+# Usuario por defecto
+CMD [ "bash" ]
