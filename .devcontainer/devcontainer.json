@@ -3,27 +3,13 @@
 
   "image": "mcr.microsoft.com/devcontainers/base:debian-11",
 
-  "features": {
-    "ghcr.io/devcontainers/features/git:1": {},
-
-    "ghcr.io/devcontainers/features/java:1": {
-      "version": "17",
-      "jdkDistro": "temurin"
-    },
-
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
-    },
-
-    "ghcr.io/devcontainers/features/angular-cli:1": {}
-  },
-
   "containerEnv": {
     "DEBIAN_FRONTEND": "noninteractive",
-    "MAVEN_VERSION": "3.9.11"
+    "MAVEN_VERSION": "3.9.11",
+    "NODE_VERSION": "18"
   },
 
-  "onCreateCommand": "apt-get update && apt-get install -y --no-install-recommends curl unzip gnupg2 ca-certificates bash && curl -fsSL https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar -xz -C /opt && ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvn /usr/bin/mvn",
+  "onCreateCommand": "apt-get update && apt-get install -y --no-install-recommends curl bash git unzip gnupg2 ca-certificates openjdk-17-jdk && curl -fsSL https://dlcdn.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar -xz -C /opt && ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvn /usr/bin/mvn && curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && apt-get install -y nodejs && npm install -g npm @angular/cli",
 
   "workspaceFolder": "/workspace",
 
