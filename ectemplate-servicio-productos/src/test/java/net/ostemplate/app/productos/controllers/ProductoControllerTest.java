@@ -15,8 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.github.classgraph.Resource;
 import net.ostemplate.app.productos.models.entity.Producto;
 import net.ostemplate.app.productos.models.entity.ProductoCantidad;
 import net.ostemplate.app.productos.models.entity.ProductoCaracteristicas;
@@ -67,11 +69,78 @@ public class ProductoControllerTest {
 
 	}
 
+	@Test
+	public void listarTest(){
+		List<ProductoEntity> listaProductos = new ArrayList<>();
+		listaProductos.add(mapToProductoEntityDummy());
+		listaProductos.add(mapToProductoEntityDummy());
+		Mockito.when(productoServiceI.findAll())
+			.thenReturn(listaProductos);
+		assertEquals(productoController.listar(),listaProductos);
+	}
+
+	@Test
+	public void insertarProductoTest(){
+		Producto producto = mapToProductoDummy();
+		Mockito.when(productoServiceI.insertProducto(Mockito.any(ProductoEntity.class)))
+			.thenReturn(producto);
+		assertEquals(productoController.insertarProducto(producto),producto);
+	}
+
+	@Test
+	public void borrarProductoTest(){
+		productoController.borrarProducto(1L);
+		Mockito.verify(productoServiceI,Mockito.times(1)).borrarProducto(Mockito.anyLong());
+	}
+
+	@Test
+	public void modificarProductoTest(){
+		Producto producto = mapToProductoDummy();
+		Mockito.when(productoServiceI.modificarProducto(Mockito.any(ProductoEntity.class)))
+			.thenReturn(producto);
+		assertEquals(productoController.modificarProducto(producto),producto);
+	}
+	
+	@Test
+	public void buscarProductoPorNombreTest(){
+		List<ProductoEntity> listaProductos = new ArrayList<>();
+		listaProductos.add(mapToProductoEntityDummy());
+		listaProductos.add(mapToProductoEntityDummy());
+		Mockito.when(productoServiceI.buscarPorNombre(Mockito.anyString()))
+			.thenReturn(listaProductos);
+		assertEquals(productoController.buscarProductoPorNombre("nombre"),listaProductos);
+	}
+
+	@Test
+	public void buscarProductoPorContieneNombreTest(){
+		List<ProductoEntity> listaProductos = new ArrayList<>();
+		listaProductos.add(mapToProductoEntityDummy());
+		listaProductos.add(mapToProductoEntityDummy());
+		Mockito.when(productoServiceI.buscarPorNombre(Mockito.anyString()))
+			.thenReturn(listaProductos);
+		assertEquals(productoController.buscarProductoPorContieneNombre("nombre"),listaProductos);
+	}
+
+	private ResponseEntity<Resource> mapToResponseEntityDummy() {
+		EasyRandom generator = new EasyRandom();
+		Resource resource = generator.nextObject(Resource.class);
+		return ResponseEntity.ok()
+				.header("Content-Disposition", "attachment; filename=\"" + "foto.jpg" + "\"")
+				.body(resource);
+	}
+
 	private Producto mapToProductoDummy() {
 		EasyRandom generator = new EasyRandom();
 		Producto producto = generator.nextObject(Producto.class);
 		producto.setProductoCaracteristicas(mapToProductoCaracteristicasDummy());
 		return producto;
+	}
+
+	private ProductoEntity mapToProductoEntityDummy() {
+		EasyRandom generator = new EasyRandom();
+		ProductoEntity productoEntity = generator.nextObject(ProductoEntity.class);
+		productoEntity.setProductoCaracteristicas(mapToProductoCaracteristicasDummy());
+		return productoEntity;
 	}
 
 	private ProductoCaracteristicas mapToProductoCaracteristicasDummy() {
