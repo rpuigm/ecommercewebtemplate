@@ -1,6 +1,11 @@
 {
-    "boot-java.change-detection.on": true,
-    "maven.terminal.useJavaHome": true,
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "java.compile.nullAnalysis.mode": "automatic"
+  // Ajuste para el servidor de lenguaje Java: apunta a JDK disponible en el contenedor
+  "java.jdt.ls.java.home": "/usr/lib/jvm/java-17-openjdk-amd64",
+  "maven.terminal.useJavaHome": true,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "githubPullRequests.ignoredPullRequestBranches": [
+      "main"
+  ],
+  "java.format.settings.url": ".vscode/java-formatter.xml"
 }
