@@ -13,8 +13,8 @@
 		<module>ectemplate-service-oauth</module>
 		<module>ectemplate-servicio-personas</module>
 		<module>ectemplate-servicio-productos</module>
-		<module>ectemplate-service-zuul-server</module>
-<!--		<module>ectemplate-servicio-gateway</module>-->
+		<!-- <module>ectemplate-service-zuul-server</module> -->
+		<module>ectemplate-servicio-gateway</module>
 	</modules>
 
 	<packaging>pom</packaging>
