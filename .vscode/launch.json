@@ -74,6 +74,16 @@
             "projectName": "springboot-servicio-zuul-server",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EctemplateServicioGetwayApplication<etctemplate-servicio-getway>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "net.ectemplate.app.gateway.EctemplateServicioGetwayApplication",
+            "projectName": "etctemplate-servicio-getway",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

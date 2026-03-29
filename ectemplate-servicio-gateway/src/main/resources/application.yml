@@ -18,6 +18,12 @@ spring:
           - Path=/api/productos/**
         filters:
           - StripPrefix=2
+      - id: servicio-personas
+        uri: lb://servicio-personas
+        predicates:
+          - Path=/api/personas/**
+        filters:
+          - StripPrefix=2
 
           
           
