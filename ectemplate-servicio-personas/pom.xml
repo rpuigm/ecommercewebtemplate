@@ -13,10 +13,6 @@
 	<version>0.3.0-SNAPSHOT</version>
 	<name>ectemplate-servicio-personas</name>
 	<description>People information service</description>
-	<properties>
-		<java.version>8</java.version>
-		<spring-cloud.version>2020.0.6</spring-cloud.version>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

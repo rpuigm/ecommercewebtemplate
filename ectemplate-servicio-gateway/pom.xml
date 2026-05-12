@@ -14,10 +14,6 @@
 	<version>0.3.0-SNAPSHOT</version>
 	<name>ectemplate-servicio-gateway</name>
 	<description>E-commerce template gateway</description>
-	<properties>
-		<java.version>11</java.version>
-		<spring-cloud.version>2020.0.6</spring-cloud.version>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
