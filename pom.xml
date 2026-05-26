@@ -6,7 +6,6 @@
 	<artifactId>ectemplate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ectemplate</name>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -14,7 +13,6 @@
 		<relativePath/>
 		<!-- lookup parent from repository -->
 	</parent>
-
 	<modules>
 		<module>ectemplate-service-config-server</module>
 		<module>ectemplate-servicio-eureka-server</module>
@@ -24,21 +22,18 @@
 		<!-- <module>ectemplate-service-zuul-server</module> -->
 		<module>ectemplate-servicio-gateway</module>
 	</modules>
-
 	<packaging>pom</packaging>
-	
-  	<properties>
+	<properties>
 		<java.version>21</java.version>
 		<spring-cloud.version>2021.0.8</spring-cloud.version>
-   		<sonar.organization>rpuigmorganitation</sonar.organization>
-    	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.organization>rpuigmorganitation</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<lombok.version>1.18.44</lombok.version>
 		<org.jeasy.easy.random.core.version>5.0.0</org.jeasy.easy.random.core.version>
 		<jacoco.version>0.8.12</jacoco.version>
 		<org.codehaus.mojo.build.helper.maven.plugin.version>3.3.0</org.codehaus.mojo.build.helper.maven.plugin.version>
-  	</properties>
-
+	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -50,5 +45,76 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco.version}</version>
+					<executions>
+						<execution>
+							<id>prepare-agent</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>report</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${org.codehaus.mojo.build.helper.maven.plugin.version}</version>
+					<executions>
+						<execution>
+							<id>add-integration-test-source</id>
+							<phase>generate-test-sources</phase>
+							<goals>
+								<goal>add-test-source</goal>
+							</goals>
+							<configuration>
+								<sources>
+									<source>src/integrationTest/java</source>
+								</sources>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<configuration>
+						<excludes>
+							<exclude>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+							</exclude>
+						</excludes>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${lombok.version}</version>
+							</path>
+						</annotationProcessorPaths>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
