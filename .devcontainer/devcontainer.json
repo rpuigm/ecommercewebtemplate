@@ -13,7 +13,15 @@
 
   "postStartCommand": "sudo mkdir -p /workspace && sudo chown vscode:vscode /workspace",
   
-  "forwardPorts": [4200, 8080, 8090],
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "enableNonRootDocker": "true",
+      "moby": "true"
+    }
+  },
+
+  "forwardPorts": [4200, 8761, 8090],
 
   "customizations": {
     "vscode": {
