@@ -6,6 +6,7 @@ Objetivo:
 - Eliminar versiones redundantes heredables desde el POM padre.
 - Eliminar propiedades redundantes.
 - Simplificar el pom.xml del módulo.
+- Incluye en el pom.xml padre la definicion de dependencias necesarias en DependencyManagement
 
 Restricciones:
 
@@ -17,7 +18,8 @@ Restricciones:
 
 Modifica únicamente:
 
-./ectemplate-servicio-eureka-server/pom.xml
+./pom.xml
+./ectemplate-servic*/pom.xml
 
 Después genera:
 

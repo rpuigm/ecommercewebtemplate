@@ -1,9 +1,7 @@
-Analiza la estructura Maven del proyecto desde la carpeta raíz.
-
 Contexto:
 
 - El archivo ./pom.xml es el POM padre.
-- El módulo a revisar es ./ectemplate-servicio-eureka-server.
+- El módulo a revisar es ./ectemplate-service-oauth.
 - El objetivo actual NO es migrar a Spring Boot 4.
 - El objetivo es dejar el módulo alineado con Spring Boot 2.7.8 y con una correcta herencia del POM padre.
 - Las versiones deben estar centralizadas en el POM padre siempre que sea posible.
@@ -11,7 +9,8 @@ Contexto:
 Analiza:
 
 - ./pom.xml
-- ./ectemplate-servicio-eureka-server/pom.xml
+- ./ectemplate-service-oauth/pom.xml
+- No leas, ni analices, ningún otro fichero
 
 Genera un informe indicando:
 

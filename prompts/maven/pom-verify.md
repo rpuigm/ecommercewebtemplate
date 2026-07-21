@@ -1,4 +1,4 @@
-Revisa el pom.xml resultante del módulo ectemplate-servicio-eureka-server.
+Revisa el pom.xml resultante del módulo {{MODULE_PATH}}.
 
 Comprueba:
 
