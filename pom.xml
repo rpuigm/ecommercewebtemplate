@@ -43,7 +43,8 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<dependency>
+			<!-- Removed obsolete dependencies -->
+			<!-- <dependency>
 				<groupId>org.springframework.security.oauth</groupId>
 				<artifactId>spring-security-oauth2</artifactId>
 				<version>2.5.2.RELEASE</version>
@@ -52,7 +53,7 @@
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-jwt</artifactId>
 				<version>1.1.1.RELEASE</version>
-			</dependency>
+			</dependency> -->
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -88,7 +89,7 @@
 							<phase>generate-test-sources</phase>
 							<goals>
 								<goal>add-test-source</goal>
-							</goals>
+							>goals>
 							<configuration>
 								<sources>
 									<source>src/integrationTest/java</source>
