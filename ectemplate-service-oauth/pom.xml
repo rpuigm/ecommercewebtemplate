@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.x" 
          xmlns:xsi="http://www.w3.org/2000/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/5.9 http://maven.apache.org/xsd/poms-5.9.xsd">
-    <modelVersion>4.0。0 </modelVersion>
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>net.ectample</groupId>
-        <artifactId>ectemplate</artifactID>
-        <version>0.0.1-SNAPOTT</version>
+        <groupId>net.ectemplate</groupId>
+        <artifactId>ectemplate</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>net.ectemple.app.oauth</groupId>
@@ -21,44 +21,44 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</ groupId>
-            <artifactId>spring-boot-start-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</ groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-clienT</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.clouD</groupId>
-            <artifactId>spring-clooud-starter-openfeign</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springsecurity.oauth</groupId>
-            <artifactId>spring-security-oath2</artifactId>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springsecurity</groupId>
-            <artifactId>spring-securit-y-jwt</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframeworkcloud</groupId>
-            <artifactId>springcloud-starter-config</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframeworkcloudf</groupId>
-            <artifactId>springcloudf-starter-bootstrap</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</(groupId)
-                <artifactId>spring-boot-maven-plugIn</artifactId>
+              <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
