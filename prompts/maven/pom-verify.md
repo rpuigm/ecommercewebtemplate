@@ -1,0 +1,15 @@
+Revisa el pom.xml resultante del módulo {{MODULE_PATH}}.
+
+Comprueba:
+
+* Correcta herencia desde el POM padre.
+* Ausencia de versiones redundantes.
+* Compatibilidad con Spring Boot 2.7.8.
+* Consistencia con dependencyManagement y pluginManagement del padre.
+* Posibles dependencias innecesarias.
+
+Genera un informe final indicando:
+
+* Problemas encontrados.
+* Mejoras futuras.
+* Preparación necesaria para una futura migración a Spring Boot 3.x o 4.x.

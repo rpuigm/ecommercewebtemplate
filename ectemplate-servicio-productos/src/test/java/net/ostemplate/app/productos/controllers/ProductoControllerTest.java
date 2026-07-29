@@ -1,6 +1,6 @@
 package net.ostemplate.app.productos.controllers;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jeasy.random.EasyRandom;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -65,7 +66,9 @@ public class ProductoControllerTest {
 		Producto producto = mapToProductoDummy();
 		Mockito.when(productoServiceI.findById(Mockito.anyLong()))
 			.thenReturn(producto);
-		assertEquals(productoController.detalle(1L),producto);
+		Assertions.assertEquals(productoController.detalle(1L),producto);
+
+		
 
 	}
 

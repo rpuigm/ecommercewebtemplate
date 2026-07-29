@@ -19,8 +19,8 @@
  "onCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends curl bash git unzip gnupg2 ca-certificates openjdk-25-jdk && sudo curl -fsSL https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | sudo tar -xz -C /opt && sudo ln -sf /opt/apache-maven-${MAVEN_VERSION}/bin/mvn /usr/bin/mvn && sudo curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo bash - && sudo apt-get install -y nodejs && sudo npm install -g npm @angular/cli && sudo npm install -g @githubnext/copilot-cli && (copilot --version || true)",
 
   "postStartCommand": "sudo mkdir -p /workspace && sudo chown vscode:vscode /workspace",
-  
-  "forwardPorts": [4200, 8080, 8090],
+
+  "forwardPorts": [4200, 8761, 8090],
 
   "customizations": {
     "vscode": {

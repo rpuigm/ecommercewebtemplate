@@ -21,5 +21,3 @@
 
 <p>Open Source online shop template - working in progress<br>
 Proyecto de código abierto de una plantilla de tienda online - trabajo en curso.<p>
-
-docker run -p 5432:5432 -e POSTGRES_PASSWORD=ruben -d -v ./postgres_data:/var/lib/postgresql/data postgres
